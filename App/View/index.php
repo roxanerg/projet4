@@ -13,23 +13,26 @@
 
 <?php
 
-while ($data = $chapter->fetch())
-{
-
+foreach ($chapters as $chapter) 
+    {
 ?>
-    <div class="episode">
-        <h3>
-            <?= htmlspecialchars($data['title']) ?>
 
-            <em>le <?= $data['jour'] ?></em>
-        </h3>
-        <p>
-            <?= nl2br(htmlspecialchars($data['content'])) ?><br />
-            <em><a href="post.php?id=<?= $data['id'] ?>">Lire la suite</a></em>
-        </p>
+    <div id=episodes>
+        <h2 id="episodes_titles">
+            <?= htmlspecialchars($chapter['titre']); ?>
+        </h2>  
+
+        <div id="episodes_dates">
+            Le <?= htmlspecialchars($chapter['jour']); ?>
+        </div>  
+
+        <p id="episodes_texts">
+            <?= nl2br(htmlspecialchars($chapter['contenu'])); ?>
+        </p> 
+
+        <a href="chapterView.php?billet=<?= $chapter['id']; ?>">Lire plus</a>
     </div>
 </aside>
-
 
 <?php
 
@@ -40,6 +43,5 @@ $chapter->closeCursor();
 ?>
 
 <?php $content = ob_get_clean(); ?>
-
 
 <?php require('template.php'); ?>

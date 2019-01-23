@@ -2,7 +2,7 @@
 
 namespace Core;
 
-require('../view/View.php');
+require('View.php');
 
 abstract class Controller 
 {

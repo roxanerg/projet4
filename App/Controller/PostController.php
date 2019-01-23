@@ -4,9 +4,14 @@ namespace App\Controller;
 
 use \Core\Controller;
 
+interface interfacePost 
+{
+    public function Index($post);
+}
+
 require('../model/PostModel.php');
 
-class PostController 
+class PostController implements interfacePost
 {
     protected $postModel;
 
@@ -22,9 +27,15 @@ class PostController
         print_r($post_object); 
     }
 
-    public function allPosts() {
-        $chapters = getPosts();
-        require('chaptersView.php');
+    public function allEpisodes() {
+        $chapters = getChapters(0, 5);
+        foreach($chapters as $key => $chapter)
+        {
+            $chapters[$key]['titre'] = htmlspecialchars($chapter['titre']);
+            $chapters[$key]['jour'] =  htmlspecialchars($chapter['jour']);
+            $chapters[$key]['contenu'] = nl2br(htmlspecialchars($chapter['contenu']));
+        }
+        require('index.php');
     }
 
     

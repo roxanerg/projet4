@@ -19,4 +19,7 @@ abstract class Model
 
         return $this->db;
     }
+
+    // + créer squelette pour chaque requête à la db ?
+
 }
