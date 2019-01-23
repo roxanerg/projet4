@@ -9,12 +9,20 @@ interface interfacePost
     public function Index($post);
 }
 
-require('../model/PostModel.php');
+require('../App/Model/PostModel.php');
+
 
 class PostController implements interfacePost
 {
     protected $postModel;
 
+    /**
+     * __construct
+     *
+     * @param  mixed $postModel
+     *
+     * @return void
+     */
     public function __construct(Postmodel $postModel)
     {
         $this->postModel = $postModel;

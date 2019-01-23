@@ -1,16 +1,14 @@
 <?php
 
-namespace Core;
-
 require('View.php');
 
-abstract class Controller 
+class Controller extends View
 {
-    private $view;
+    public $view;
 
-    public function __construct(View $view) 
+    public function __construct() 
     {
-        $this->view = $view;
+        $this->view = new View();
     }
 
     public function index() {

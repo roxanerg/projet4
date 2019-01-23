@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class CommentController 
 {
-    function addComment($postId, $author, $comment)
+    function add($postId, $author, $comment)
     {
         $addComm = postComment($postId, $author, $comment);
 

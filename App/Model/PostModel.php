@@ -4,7 +4,7 @@ namespace App\Model;
 
 use \Core\Model;
 
-require('Model.php');
+require('../Core/Model.php');
 
 class PostModel extends Model
 {

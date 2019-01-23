@@ -1,7 +1,8 @@
 <?php
 
-require('../controller/mainController.php');
-require('../controller/postController.php');
+require('../App/Controller/AppController.php');
+require('../App/Controller/PostController.php');
+require('../App/Controller/CommentController.php');
 
 $action_get = '';
 
@@ -20,9 +21,10 @@ $action_get = '';
             $controller->index($action[1]);
             break;
 
-        case 'addComment' : addComment();
+        case 'addComment' : $controller = new commentController();
+            $controller->add();
             break;
 
-        default : $controller = new mainController();
+        default : $controller = new AppController();
         $controller->index();
     }
