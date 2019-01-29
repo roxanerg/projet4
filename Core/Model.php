@@ -6,9 +6,9 @@ abstract class Model
 {
     protected $db = null;
 
-    public function __construct() 
+    public function __construct(PDO $db)
     {
-        $this->dbConnect();
+      $this->db = $db;
     }
 
     protected function dbConnect()

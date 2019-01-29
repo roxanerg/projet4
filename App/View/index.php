@@ -1,19 +1,59 @@
-<?php $title = 'Accueil'; ?>
+<?php 
 
+$title = 'Accueil'; 
 
-<?php ob_start(); ?>
+require('/View/template.php'); 
+require('/Model/postModel.php');
+
+$content = ob_start(); 
+$manager = new postModel();
+
+?>
 
 <div>
     <h1>Bienvenue sur le blog de Jean Forteroche</h1>
     <img>
 </div>
 
-<aside>
-    <h2>Episodes :</h2>
+<h2>Les derniers épisodes :</h2>
 
 <?php
 
-foreach ($chapters as $chapter) 
+    if (isset($_GET['id']))
+    {
+        $episodes = $manager->getEpisode((int) $_GET['id']);
+
+        echo 'Le ', $episodes->date_creation()->format('d/m/Y à H\hi'), '</p>', "\n",
+            '<h2>', $episodes->titre(), '</h2>', "\n",
+            '<p>', nl2br($episodes->contenu()), '</p>', "\n";
+
+        if ($episodes->date_creation() != $episodes->date_modif()) {
+            echo '<p><em>Modifiée le ', $episodes->date_modif()->format('d/m/Y à H\hi'), '</em></p>';
+        }
+    }
+    else
+    {
+        foreach ($manager->getList(0, 5) as $episodes)
+        {
+            if (strlen($episodes->contenu()) <= 200) {
+                $contenu = $episodes->contenu();
+            }
+            else
+            {
+                $debut = substr($episodes->contenu(), 0, 200);
+                $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+                $contenu = $debut;
+            }
+            echo '<h4><a href="?id=', $episodes->id(), '">', $episodes->titre(), '</a></h4>', "\n", '<p>', nl2br($contenu), '</p>';
+        }
+    }
+
+?>
+
+/*
+<?php 
+
+    foreach ($chapters as $chapter) 
     {
 ?>
 
@@ -30,18 +70,14 @@ foreach ($chapters as $chapter)
             <?= nl2br(htmlspecialchars($chapter['contenu'])); ?>
         </p> 
 
-        <a href="chapterView.php?billet=<?= $chapter['id']; ?>">Lire plus</a>
-    </div>
-</aside>
-
+        <a href="chapterView.php?episode=<?= $chapter['id']; ?>">Lire plus</a>
+    </div> 
+     
 <?php
 
 }
 
-$chapter->closeCursor();
-
-?>
+?>*/
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('/View/template.php'); ?>
