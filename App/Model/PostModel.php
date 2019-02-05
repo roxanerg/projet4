@@ -38,7 +38,7 @@ class PostModel extends Model
     /**
      * 
      */
-    public function getList($debut = -1, $limite = -1)
+    public function getList($debut = -1, $limite = -1, $textmax = 500)
     {
         $sql = 'SELECT id, titre, contenu, date_creation, date_modif FROM episodes ORDER BY id DESC'; 
 
@@ -50,13 +50,13 @@ class PostModel extends Model
 
         $request->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'postController');
         $episodesList = $request->fetchAll();
+        $i=0;
 
-        while ($row=$request->fetchAll()) {
-            $excerpt = substr($row->contenu, 0, 150);
-            $space = strpos($excerpt, '');
-            echo substr($excerpt, 0, $space). '...'; 
+        foreach ($episodesList as $episodes) {
+            $space = strpos($episodes['contenu'], ' ', $textmax);
+            $episodesList[$i]['contenu'] =  substr($episodes['contenu'], 0, $space) . '...';
+            $i++;
         }
-
         $request->closeCursor();
         return $episodesList;
     }
@@ -79,10 +79,10 @@ class PostModel extends Model
         $request = $this->db->prepare('SELECT id, titre, contenu, date_creation, date_modif FROM episodes WHERE id = :id');
         $request->bindValue(':id', (int) $id, PDO::PARAM_INT);
         $request->execute();
-        $request->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'postModel');
-        $episodes = $request->fetch();
-
-        return $episodes;
+        $request->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'postController');
+        $episodes = $request->fetchAll();
+        
+        return $episodes[0];
     }
 
     protected function update(Episodes $episodes)

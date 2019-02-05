@@ -25,6 +25,10 @@ $action_get = '';
             $controller->add();
             break;
 
+        case 'chapterView' : $controller = new AppController();
+            $controller->chapterview($_GET['id']);
+            break;
+
         default : $controller = new AppController();
-        $controller->index();
+            $controller->index();
     }

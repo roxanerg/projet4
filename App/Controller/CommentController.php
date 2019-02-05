@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
-class CommentController 
+use \Core\Controller;
+
+require('../App/Model/CommentModel.php');
+
+
+abstractclass CommentController 
 {
     function add($postId, $author, $comment)
     {

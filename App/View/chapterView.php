@@ -1,46 +1,44 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Mon blog</title>
-    </head>
+<?php $title = "Blog de Jean Forteroche"; ?>
 
-    <body>
-
-        <p><a href="chaptersView.php">Retour à la liste des billets</a></p>
+<?php ob_start(); ?>
 
 <?php
 
-if (empty($chapter)) 
+if (empty($vars)) 
 {
         echo '<p> Ce billet n\'existe pas </p>';
 } 
 else 
 {
+    //print_r($vars);
+    $page=0; ////// POUR PAS COMMENTER LES LIENS DE PAGES
 ?>
-        <div id=notes>
-            <h2 id="notes_titles">
-                <?php echo htmlspecialchars($chapter['titre']); ?>
+        <div id=episode>
+            <h2 id="episode_title">
+                <?= htmlspecialchars($vars['episodes']['titre']); ?>
             </h2>  
 
-            <div id="notes_dates">
-                <?php echo htmlspecialchars($chapter['jour']); ?>
+            <div id="episode_date">
+                <?= htmlspecialchars($vars['episodes']['date_creation']); ?>
             </div>  
+            <div id="episode_date">
+                <?= htmlspecialchars($vars['episodes']['date_modif']); ?>
+            </div> 
 
-            <p id="notes_texts">
-                <?php echo nl2br(htmlspecialchars($chapter['contenu'])); ?>
+            <p id="episode_text">
+                <?= nl2br(htmlspecialchars($vars['episodes']['contenu'])); ?>
             </p> 
         </div>
         
-        <a href="?page=<?php echo $page - 1, $chapter['id']; ?>">Page précédente</a>
-        <a href="?page=<?php echo $page + 1, $chapter['id']; ?>">Page suivante</a>
+        <a href="?page=<?= $page - 1, $vars['id']; ?>">Page précédente</a>
+        <a href="?page=<?= $page + 1, $vars['id']; ?>">Page suivante</a>
 
 <?php
 }
 
 ?>
         <h3>Ajouter un commentaire<h3>
-            <form action="index(routeur).php?action=addComment&amp;id=<?= $chapter['id'] ?>" method="post">
+            <form action="index.php?action=addComment&amp;id=<?= $vars['episode']['id'] ?>" method="post">
                 
                 <input type="text" name="auteur" placeholder="Pseudo"><br />
                 <textarea rows="10" cols="30" name="commentaire" placeholder="Commentaire"></textarea><br />
@@ -50,20 +48,20 @@ else
 
         <h3 id="comms">Commentaires</h3>
 
-<?php
+<?php foreach ($vars['comments'] as $comments): ?>
 
-while ($comm = $comments->fetch()) 
-{
-?>
-        <h4><?=htmlspecialchars($comm['auteur'])?></h4>
-        <p><?=nl2br(htmlspecialchars($comm['commentaire']))?></p>
-        <p><em><?=htmlspecialchars($comm['jour_comm'])?></em></p>
+        <h4><?=$comments['pseudo']?></h4>
+
+        <p><?=$comments['commentaire']?></p>
+
+        <p><em><?= htmlspecialchars($comments['jour_comm'])?></em></p>
     
-<?php
-}
+<?php endforeach ?>
 
-$comments->closeCursor();
-?>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require('Template.php'); ?>
 
     </body>
 </html>

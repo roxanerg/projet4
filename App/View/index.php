@@ -17,7 +17,7 @@
 
 <?php foreach ($vars['episodes'] as $episode): ?>
     <h4>
-        <a href="?id=<?= $episode['id']?>"><?= $episode['titre']?></a>
+        <a href="?action=chapterView&id=<?= $episode['id']?>"><?= $episode['titre']?></a>
     </h4>
     <p><?= $episode['contenu']?></p>
 </div>

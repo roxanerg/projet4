@@ -1,19 +1,15 @@
 <?php
 
-namespace Model;
-
-use \Core\Model;
-
-require('App/Model.php');
 
 class CommentModel extends Model
 {
     
-    function getComments($postId) 
+    function getComments($episodeId) 
     {  
         $this->dbConnect();
-        $comments = $db->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, "%d/%m/%Y %Hh%imin%ss") AS jour_comm FROM commentaires WHERE id_episode = ? ORDER BY date_commentaire DESC');
-        $comments->execute(array($postId));
+        $request = $this->db->prepare('SELECT pseudo, commentaire, DATE_FORMAT(date_commentaire, "%d/%m/%Y %Hh%imin%ss") AS jour_comm FROM commentaires WHERE id_episode = ? ORDER BY date_commentaire DESC');
+        $request->execute(array($episodeId));
+        $comments = $request->fetchAll();
         return $comments;
     }
 
@@ -22,7 +18,7 @@ class CommentModel extends Model
         $this->dbConnect($postId, $auteur, $commentaire);
         if (isset($_POST['auteur']) && isset($_POST['commentaire']))
         {
-            $request = $db->prepare('INSERT INTO commentaires (id_episode, auteur, commentaire, date_commentaire) VALUES (?, ?, ?, NOW())');
+            $request = $db->prepare('INSERT INTO commentaires (id_episode, pseudo, commentaire, date_commentaire) VALUES (?, ?, ?, NOW())');
             $addComm = $request->execute(array($postId, $auteur, $commentaire));
             return $addComm;       
         }
