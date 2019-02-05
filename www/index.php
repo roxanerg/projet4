@@ -1,8 +1,8 @@
 <?php
 
-require('../App/Controller/AppController.php');
-require('../App/Controller/PostController.php');
-require('../App/Controller/CommentController.php');
+require_once('../App/Controller/AppController.php');
+//require_once('../App/Controller/PostController.php');
+//require_once('../App/Controller/CommentController.php');
 
 $action_get = '';
 

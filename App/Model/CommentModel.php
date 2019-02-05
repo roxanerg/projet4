@@ -31,7 +31,7 @@ class CommentModel extends Model
     {
         $this->dbConnect();
         $addComm = postComment($postId, $author, $comment);
-        $request= $this->db->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y") AS jour FROM episodes WHERE id = ?');
+        $request= $this->db->prepare('SELECT id, titre, episode, DATE_FORMAT(date_creation, "%d/%m/%Y") AS jour FROM episodes WHERE id = ?');
         $request->execute(array($postId));
         $chapter = $request->fetch();
         if ($addComm === false) {

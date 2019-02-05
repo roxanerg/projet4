@@ -1,4 +1,91 @@
+@font-face 
+{
+    font-family: 'LemonMilklight';
+    src: url('www/css/fonts/LemonMilklight.otf') format('opentype'),
+    font-weight: normal;
+    font-style: normal;
+}
+
 body 
 {
-    background: url("images/AuroraWinterTrain.jpg") no-repeat fixed;
+    margin: 0;
+    background: #F5F5F5;
+    font-family: 'LemonMilklight';
+}
+
+ul 
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+a 
+{
+    text-decoration: none;
+}
+
+header 
+{
+    display: flex;
+    align-items: center;
+}
+
+#logo_container
+{
+    width: 50%;
+}
+
+#logo 
+{
+    max-width: 150px;
+}
+
+#navbar ul
+{
+    display: flex;
+}
+
+#navbar ul li 
+{
+    padding: 25px;
+    font-size: 1.4em;
+    color: #FFF;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#navbar ul li:hover 
+{
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#home_screen 
+{
+    position: relative;
+}
+
+#home_title
+{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    background: rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+#home_title:hover
+{
+    background: rgba(0, 0, 0, 0.15);
+}
+
+h1
+{
+    padding: 10px;
+    font-size: 3em;
+    color: antiquewhite;
+}
+
+#home_image
+{
+    width: 100%;
 }

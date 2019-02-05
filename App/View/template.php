@@ -14,21 +14,30 @@
 
     <body>
 
-    <nav id="navbar">
-        <ul>
-        <li id="home">Accueil</li>
-        <li>Episodes</li>
-        <li id="login"><i class="fas fa-power-off"></i></li>
-        </ul>
-    </nav>
-        
-    <div id="container">
-        <?= $content ?>
-    </div>
+        <header>
 
-    <footer>
-    
-    </footer>
+            <div id="logo_container">
+                <a href="#body"><img src="./www/images/logo_jf.png" id="logo" alt="logo Jean Forteroche"></a>
+            </div>
+
+            <nav id="navbar">
+                <ul>
+                    <li id="home">Accueil</li>
+                    <li>Episodes</li>
+                    <li>Biographie</li>
+                    <li id="login"><i class="fas fa-power-off"></i></li>
+                </ul>
+            </nav>
+
+        </header>
+            
+        <div id="container">
+            <?= $content ?>
+        </div>
+
+        <footer>
+        
+        </footer>
 
     </body>
 </html>

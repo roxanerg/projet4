@@ -1,20 +1,18 @@
 <?php 
 
-namespace Core;
-
 abstract class Model 
 {
     protected $db = null;
 
-    public function __construct(PDO $db)
+    public function __construct(PDO $db=null)
     {
-      $this->db = $db;
+      $this->dbConnect();
     }
 
     protected function dbConnect()
     {
         if ($this->db === null) {
-            $this->db = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $this->db = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
 
         return $this->db;

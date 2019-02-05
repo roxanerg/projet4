@@ -1,8 +1,5 @@
 <?php
 
-namespace App\Model;
-
-use \Core\Model;
 
 require('../Core/Model.php');
 
@@ -38,17 +35,27 @@ class PostModel extends Model
         $this->db->exec('DELETE FROM episodes WHERE id = '.(int) $id);
     }
 
+    /**
+     * 
+     */
     public function getList($debut = -1, $limite = -1)
     {
         $sql = 'SELECT id, titre, contenu, date_creation, date_modif FROM episodes ORDER BY id DESC'; 
 
         if ($debut != -1 || $limite != -1) {
-            $sql = ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+            $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
         }
+       
         $request = $this->db->query($sql);
 
         $request->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'postController');
         $episodesList = $request->fetchAll();
+
+        while ($row=$request->fetchAll()) {
+            $excerpt = substr($row->contenu, 0, 150);
+            $space = strpos($excerpt, '');
+            echo substr($excerpt, 0, $space). '...'; 
+        }
 
         $request->closeCursor();
         return $episodesList;
