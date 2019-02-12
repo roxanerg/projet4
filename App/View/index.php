@@ -1,7 +1,5 @@
 <?php $title = "Blog de Jean Forteroche"; ?>
 
-<?php ob_start(); ?>
-
 <div>
     <div id="home_screen">
         <div id="home_title">
@@ -20,11 +18,14 @@
         <a href="?action=chapterView&id=<?= $episode['id']?>"><?= $episode['titre']?></a>
     </h4>
     <p><?= $episode['contenu']?></p>
+
+
+<?php endforeach; ?>
+
+<?php for ($i = 1; $i <= $vars['pages']; $i++): ?>
+    <div id="pagination">
+        <a href="?page=<?=$i?>"><?=$i?></a>
+    </div>    
+<?php endfor; ?>
+
 </div>
-
-<?php endforeach ?>
-
-<?php $content = ob_get_clean(); ?>
-
-<?php require('Template.php'); ?>
-

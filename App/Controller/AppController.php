@@ -9,20 +9,19 @@ class AppController extends Controller
     
     public function index()
     {
+        $results_per_page = 5;
+        if(isset($_GET['page'])) {
+            $page = $_GET['page'];
+        }else{
+            $page=1;
+        }
         $postModel = new PostModel();
-        $episodes = $postModel->getList(0, 5);
-        
-        $this->view->display('index', ['episodes' => $episodes]);
+        $episodes = $postModel->getList(($page-1) * $results_per_page, $results_per_page*$page);
+        $count = $postModel->count();
+        $pages = ceil($count / $results_per_page); 
+        //$vars = array('count'=> $count, 'episodes' => $episodes);
+        $this->view->display('index', ['pages' => $pages, 'episodes' => $episodes]);
        
     }
-    public function chapterView($episode_id=0)  
-    {
-        $postModel = new PostModel();
-        $episodes = $postModel->getEpisode($episode_id);
-        $commentModel = new CommentModel();
-        $comments = $commentModel->getComments($episode_id);
-        $this->view->display('chapterView', ['episodes' => $episodes, 'comments' => $comments]);
-    }
-
 
 }

@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Controller;
-
-use \Core\Controller;
-
-require('../App/Model/CommentModel.php');
+require_once('../App/Model/CommentModel.php');
 
 
-abstractclass CommentController 
+class CommentController 
 {
-    function add($postId, $author, $comment)
+    function add($post)
     {
-        $addComm = postComment($postId, $author, $comment);
+        $commentModel = new CommentModel();
+        $addComm = $commentModel->postComment($post['episodeId'], $post['auteur'], $post['commentaire']);
+    }
 
-        if ($addComm === false) {
-            die('Impossible d\'ajouter le commentaire !');
-        }
-        else {
-            header('Location: index.php?action=post&id=' . $postId);
-        }
+    function report($get) 
+    {
+        $commentModel = new CommentModel();
+        $reportComm = $commentModel->reportAbuse($get['id']);
     }
 } 

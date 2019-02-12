@@ -1,7 +1,5 @@
 <?php $title = "Blog de Jean Forteroche"; ?>
 
-<?php ob_start(); ?>
-
 <?php
 
 if (empty($vars)) 
@@ -11,13 +9,13 @@ if (empty($vars))
 else 
 {
     //print_r($vars);
-    $page=0; ////// POUR PAS COMMENTER LES LIENS DE PAGES
+    $page=$vars['episodes']['id']; ////// POUR PAS COMMENTER LES LIENS DE PAGES
 ?>
-        <div id=episode>
+        <div id="episode">
             <h2 id="episode_title">
                 <?= htmlspecialchars($vars['episodes']['titre']); ?>
             </h2>  
-
+            <!--ajouter une condition pr afficher la date de creation OU modif si existe -->
             <div id="episode_date">
                 <?= htmlspecialchars($vars['episodes']['date_creation']); ?>
             </div>  
@@ -30,38 +28,56 @@ else
             </p> 
         </div>
         
-        <a href="?page=<?= $page - 1, $vars['id']; ?>">Page précédente</a>
-        <a href="?page=<?= $page + 1, $vars['id']; ?>">Page suivante</a>
+        <a href="?action=chapterView&id=<?= $page - 1; ?>">Page précédente</a>
+        <a href="?action=chapterView&id=<?= $page + 1; ?>">Page suivante</a>
 
 <?php
 }
 
 ?>
         <h3>Ajouter un commentaire<h3>
-            <form action="index.php?action=addComment&amp;id=<?= $vars['episode']['id'] ?>" method="post">
-                
-                <input type="text" name="auteur" placeholder="Pseudo"><br />
+        <!-- addComment+id -->
+            <form action="index.php?action=addComment" method="post"> 
+                <input type="hidden" name="episodeId" value="<?= $vars['episodes']['id']?>">
+                <input type="text" name="auteur" placeholder="Nom"><br />
                 <textarea rows="10" cols="30" name="commentaire" placeholder="Commentaire"></textarea><br />
                 <input type="submit" value="Valider"> 
-
             </form>
 
         <h3 id="comms">Commentaires</h3>
 
 <?php foreach ($vars['comments'] as $comments): ?>
 
-        <h4><?=$comments['pseudo']?></h4>
+        <h4><?=$comments['auteur']?></h4>
 
         <p><?=$comments['commentaire']?></p>
 
-        <p><em><?= htmlspecialchars($comments['jour_comm'])?></em></p>
+        <p><em><?=$comments['jour_comm']?></em></p>
+
+        <button class="report" name="<?=$comments['id']?>"><i class="far fa-flag"></i></button>
     
 <?php endforeach ?>
 
+<script>
 
-<?php $content = ob_get_clean(); ?>
+$(document).ready(function() {
+ 
+    $('.report').on('click', function(event) {
 
-<?php require('Template.php'); ?>
+        var comment_id = $(this).attr('name');
 
-    </body>
-</html>
+        $.ajax ({
+            url:"index.php?action=reportComment&id=" + comment_id,
+            method:"GET",
+            dataType:"text",
+            success:function()
+            {
+                alert('Le commentaire a bien été signalé');
+            }
+
+
+        })
+    })
+ });
+
+ </script>
