@@ -1,7 +1,15 @@
 @font-face 
 {
-    font-family: 'LemonMilklight';
-    src: url('www/css/fonts/LemonMilklight.otf') format('opentype'),
+    font-family: 'Roboto-Black';
+    src: url('../www/css/fonts/Roboto-Black.ttf') format('truetype'),
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face 
+{
+    font-family: 'CocogooseLight';
+    src: url('www/css/fonts/CocogooseLight.ttf') format('truetype'),
     font-weight: normal;
     font-style: normal;
 }
@@ -9,14 +17,19 @@
 body 
 {
     margin: 0;
-    background: #F5F5F5;
-    font-family: 'LemonMilklight';
+    background: lightgray;
+}
+
+h1, h2, h3, h4
+{
+    font-family: 'Roboto-Black';
 }
 
 ul 
 {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 a 
@@ -26,37 +39,96 @@ a
 
 header 
 {
-    display: flex;
-    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background: rgba(245, 245, 245, 0.5);
+}
+
+header::after
+{
+    line-height: 3px;
+    width: 10px;
+    height: 10px;
+    border-bottom: 3px teal inset;
 }
 
 #logo_container
 {
-    width: 50%;
+    position: absolute;
+    top: 2px;
+    left: 15px;
 }
 
 #logo 
 {
     max-width: 150px;
+    border-radius: 50%;
+    border: 1px transparent solid;
+}
+
+#logo:hover
+{
+    animation: flip 1.2s infinite;
+    border: 1px lightgrey solid;
+}
+
+@keyframes flip
+{
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+#navbar
+{
 }
 
 #navbar ul
 {
     display: flex;
+    justify-content: flex-end;
 }
 
 #navbar ul li 
 {
-    padding: 25px;
-    font-size: 1.4em;
-    color: #FFF;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.1);
+    font-size: 1.2em;
+    border-bottom: 3px transparent solid;
+    background: rgba(0, 128, 128, 0.7);
 }
 
-#navbar ul li:hover 
+#navbar ul li:hover
 {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 3px rgb(252, 229, 12) solid;
+}
+
+#navbar ul a
+{
+    color: #fff;
+}
+
+#navbar ul a:hover
+{
+    color: teal;
+}
+
+#navbar ul i
+{
+    margin: 20px 30px;
+}
+
+#home::before
+{ 
+	content: '';
+	right: 0;
+	border-bottom : 50px solid teal;
+	border-left : 18px solid transparent;
+}
+
+#login a i 
+{
+    font-size: 1em;
 }
 
 #home_screen 
@@ -69,20 +141,28 @@ header
     position: absolute;
     top: 50%;
     left: 25%;
-    background: rgba(0, 0, 0, 0.2);
     text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 #home_title:hover
 {
-    background: rgba(0, 0, 0, 0.15);
 }
 
-h1
+#title
 {
+    display: block;
+    color: #efd8c9;
+    font-size: 2em;
+    font-weight: bold;   
     padding: 10px;
-    font-size: 3em;
-    color: antiquewhite;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#author
+{
+    background: rgba(245, 245, 245, 0.5);   
 }
 
 #home_image
@@ -90,10 +170,18 @@ h1
     width: 100%;
 }
 
-
+#home_ep
+{
+    display: flex;
+}
 /*pagination*/
 
 #pagination 
 {
     display: flex;
+}
+
+.active
+{
+    color: red;
 }
