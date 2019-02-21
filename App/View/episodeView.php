@@ -9,27 +9,27 @@ if (empty($vars))
 else 
 {
     //print_r($vars);
-    $page=$vars['episodes']['id']; ////// POUR PAS COMMENTER LES LIENS DE PAGES
+    $page=$vars['episode']['id']; ////// POUR PAS COMMENTER LES LIENS DE PAGES
 ?>
         <div id="episode">
             <h2 id="episode_title">
-                <?= htmlspecialchars($vars['episodes']['titre']); ?>
+                <?= htmlspecialchars($vars['episode']['titre']); ?>
             </h2>  
             <!--ajouter une condition pr afficher la date de creation OU modif si existe -->
             <div id="episode_date">
-                <?= htmlspecialchars($vars['episodes']['date_creation']); ?>
+                <?= htmlspecialchars($vars['episode']['date_creation']); ?>
             </div>  
             <div id="episode_date">
-                <?= htmlspecialchars($vars['episodes']['date_modif']); ?>
+                <?= htmlspecialchars($vars['episode']['date_modif']); ?>
             </div> 
 
             <p id="episode_text">
-                <?= nl2br(htmlspecialchars($vars['episodes']['contenu'])); ?>
+                <?= nl2br(htmlspecialchars($vars['episode']['contenu'])); ?>
             </p> 
         </div>
         
-        <a href="?action=chapterView&id=<?= $page - 1; ?>">Page précédente</a>
-        <a href="?action=chapterView&id=<?= $page + 1; ?>">Page suivante</a>
+        <a href="?action=episodeView&id=<?= $page - 1; ?>">Page précédente</a>
+        <a href="?action=episodeView&id=<?= $page + 1; ?>">Page suivante</a>
 
 <?php
 }
@@ -38,7 +38,7 @@ else
         <h3>Ajouter un commentaire<h3>
         <!-- addComment+id -->
             <form action="index.php?action=addComment" method="post"> 
-                <input type="hidden" name="episodeId" value="<?= $vars['episodes']['id']?>">
+                <input type="hidden" name="episodeId" value="<?= $vars['episode']['id']?>">
                 <input type="text" name="auteur" placeholder="Nom"><br />
                 <textarea rows="10" cols="30" name="commentaire" placeholder="Commentaire"></textarea><br />
                 <input type="submit" value="Valider"> 

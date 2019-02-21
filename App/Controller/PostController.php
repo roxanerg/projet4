@@ -10,20 +10,10 @@ class PostController extends Controller
     public function view($episode_id=0)  
     {
         $postModel = new PostModel();
-        $episodes = $postModel->getEpisode($episode_id);
+        $episode = $postModel->get($episode_id);
         $commentModel = new CommentModel();
-        $comments = $commentModel->getComments($episode_id);
-        $this->view->display('chapterView', ['episodes' => $episodes, 'comments' => $comments]);
+        $comments = $commentModel->get($episode_id);
+        $this->view->display('episodeView', ['episode' => $episode, 'comments' => $comments]);
     }
 
-    /* exemple sauvegarde
-    public function save(Episodes $episodes)
-    {
-        if ($episodes->isValid()) {
-            $episodes->isNew() ? $this->add($episodes) : $this->update($episodes);
-        }
-        else {
-            throw new RuntimeException('La news doit être valide pour être enregistrée');
-        }
-    }*/
 }
