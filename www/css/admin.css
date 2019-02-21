@@ -1,0 +1,53 @@
+ul
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+a:hover
+{
+    text-decoration: none;
+}
+
+.wrapper
+{
+    align-items: stretch;
+}
+
+#header_admin
+{
+    position: fixed;
+    height: 100%;
+    padding-right: 5px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#logo_box
+{
+    text-align: center;
+    padding-top: 10px;
+}
+
+#logo
+{
+    max-width: 130px;
+}
+
+#navbar li
+{
+    padding: 5px;
+}
+
+#navbar i
+{
+    padding: 5px;
+}
+
+caption
+{
+    display: none;
+}
+
+.txt_episode
+{
+}
