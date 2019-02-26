@@ -1,21 +1,23 @@
 <?php
+    namespace App\Controller\Admin;
+    use \Core\Controller;
+    use App\Model\Comments;
 
-require_once('../Core/Controller.php');
-require_once('../App/Model/CommentModel.php');
+require_once('../App/Model/Comments.php');
 
-class Comments extends Controller
+class AdComments extends Controller
 {
 
     function view()
     {
-        $commentModel = new CommentModel();
+        $commentModel = new Comments();
         $comments = $commentModel->all();
         $this->view->displayAdmin('comments', ['comments' => $comments]);
     }
     
     function delete($commentId=0)
     {
-        $commentModel = new CommentModel();
+        $commentModel = new Comments();
         $deleted = $commentModel->delete($commentId);
     }
 } 

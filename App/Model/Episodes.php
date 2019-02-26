@@ -1,8 +1,8 @@
 <?php
+namespace App\Model;
+use Core\Model;
 
-require_once('../Core/Model.php');
-
-class PostModel extends Model
+class Episodes extends Model
 {
 
     /**
@@ -10,6 +10,11 @@ class PostModel extends Model
      */
     public function list($debut = 0, $limite = 5, $textmax = 500)
     {
+        /*$request = $this->db->prepare('SELECT id, titre, contenu, date_creation, date_modif FROM episodes ORDER BY id DESC');
+        $request->execute(array($episodeId));
+        $episodesList = $request->fetchAll();
+        return $episodesList;*/
+
         $sql = 'SELECT id, titre, contenu, date_creation, date_modif FROM episodes ORDER BY id DESC'; 
 
         $sql .= ' LIMIT '.(int) $limite;
@@ -31,13 +36,16 @@ class PostModel extends Model
     
     public function count()
     {
-        return $this->db->query('SELECT COUNT(*) FROM episodes')->fetchColumn();
+        $request = $this->db->prepare('SELECT COUNT(*) FROM episodes');
+        $request->execute(array());
+        $count = $request->fetchColumn();
+        return $count;
     }
 
     public function get($id)
     {
         $request = $this->db->prepare('SELECT id, titre, contenu, date_creation, date_modif FROM episodes WHERE id = :id');
-        $request->bindValue(':id', (int) $id, PDO::PARAM_INT);
+        $request->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $request->execute();
         $episodes = $request->fetchAll();
         
@@ -47,9 +55,9 @@ class PostModel extends Model
     function add($titre, $contenu, $date_creation)
     {
         $request = $this->db->prepare('INSERT INTO episodes (id, titre, contenu, date_creation, date_modif) VALUES(NULL, :titre, :contenu, :date_creation, NOW())');
-        $request->bindParam(':titre', $titre, PDO::PARAM_STR);
-        $request->bindParam(':contenu', $contenu, PDO::PARAM_STR);
-        $request->bindParam(':date_creation', $date_creation, PDO::PARAM_STR);
+        $request->bindParam(':titre', $titre, \PDO::PARAM_STR);
+        $request->bindParam(':contenu', $contenu, \PDO::PARAM_STR);
+        $request->bindParam(':date_creation', $date_creation, \PDO::PARAM_STR);
         $add_post = $request->execute();
         return $add_post;
     }
@@ -62,9 +70,9 @@ class PostModel extends Model
     function update($id, $titre, $contenu)
     {
         $request = $this->db->prepare('UPDATE episodes SET titre = :titre, contenu = :contenu, date_modif = NOW() WHERE id = :id');
-        $request->bindValue(':titre', $titre, PDO::PARAM_STR);
-        $request->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-        $request->bindValue(':id', $id, PDO::PARAM_INT);
+        $request->bindValue(':titre', $titre, \PDO::PARAM_STR);
+        $request->bindValue(':contenu', $contenu, \PDO::PARAM_STR);
+        $request->bindValue(':id', $id, \PDO::PARAM_INT);
         $request->execute();
     }
 }

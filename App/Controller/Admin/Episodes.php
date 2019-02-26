@@ -1,22 +1,24 @@
 <?php
+    namespace App\Controller\Admin;
+    use Core\Controller;
+    use App\Model\Episodes;
 
-require_once('../Core/Controller.php');
-require_once('../Core/View.php');
-require_once('../App/Model/PostModel.php');
 
-class Episodes extends Controller
+//require_once('../App/Model/Episodes.php');
+
+class AdEpisodes extends Controller
 {
     
     function viewAll()
     {
-        $postModel = new PostModel();
+        $postModel = new Episodes();
         $episodes = $postModel->list(0, 50, 300);
         $this->view->displayAdmin('episodes', ['episodes' => $episodes]);
     }
 
     function edit($id=0, $post)  
     {      
-        $postModel = new PostModel();
+        $postModel = new Episodes();
         if (!empty($post)) 
         {
             $edit_post = $postModel->update($id, $post['titre'], $post['contenu']);
@@ -27,7 +29,7 @@ class Episodes extends Controller
     
     function add($post)
     {
-        $postModel = new PostModel();
+        $postModel = new Episodes();
         $add_post = $postModel->add($post['titre'], $post['contenu'], $post['date_creation']);
     }
 

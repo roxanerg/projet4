@@ -1,6 +1,9 @@
 <?php
+    namespace App\Controller\Admin;
+    use \Core\Controller;
+    use App\Model\LoginModel;
 
-require_once('../App/Model/LoginModel.php');
+require_once('../App/Model/Login.php');
 
 class LoginController extends Controller
 {

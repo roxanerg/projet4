@@ -1,15 +1,14 @@
 <?php
-
-require_once ('../Core/Controller.php');
-require_once ('../App/Model/PostModel.php');
-require_once ('../App/Model/CommentModel.php');
+namespace App\Controller;
+use Core\Controller;
+//use App\Model;
 
 class AppController extends Controller 
 {
     
     public function index()
     {
-        $postModel = new PostModel();
+        $postModel = new \App\Model\Episodes();
         $count = $postModel->count();
         
         $results_per_page = 5;

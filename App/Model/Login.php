@@ -1,4 +1,6 @@
 <?php
+    namespace App\Model;
+    use Core\Model;
 
 require_once('../Core/Model.php');
 
