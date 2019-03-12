@@ -41,14 +41,14 @@
         case 'loginAdmin' : if (isset($_SESSION['connected']) && $_SESSION['connected']) {
             header('Location: /index.php?action=indexAdmin');
         }
-                $controller = new App\Controller\Admin\LoginAdmin();
+                $controller = new App\Controller\Admin\LogAdmin();
                 $controller->login($_POST, 'indexAdmin');
             
             break;
         case 'indexAdmin' : if (!$_SESSION['connected']) {
             header('Location: /index.php?action=loginAdmin');
         }
-        $controller = new App\Controller\Admin\AdminController();
+        $controller = new App\Controller\Admin\Admin();
         $controller->index();
                 break;
         
@@ -89,6 +89,19 @@
 
         case 'addBio' : $controller = new App\Controller\Admin\Bio();
             $controller->add($_POST);
+            break;
+
+        case 'allUsers' : $controller = new App\Controller\Admin\Users();
+            $controller->viewAll();
+            break;
+
+        case 'addUser' : $controller = new App\Controller\Admin\Users();
+            $controller->add($_POST);
+            break;
+
+        case 'deleteUser' : $controller = new App\Controller\Admin\Users();
+            $controller->delete($_GET['id']);
+            $controller->viewAll();
             break;
 
         default : $controller = new App\Controller\App();

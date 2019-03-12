@@ -33,7 +33,8 @@
                     <li><a href="?action=indexAdmin"><i class="fas fa-solar-panel"></i>Tableau de bord</a></li>
                     <li><a href="?action=allEpisodes"><i class="fas fa-pencil-alt"></i>Episodes</a></li>
                     <li><a href="?action=allComments"><i class="far fa-comment-alt"></i>Commentaires</a></li>
-                    <li><a href="?action=editBio"><i class="fas fa-user-edit"></i>Biographie</a></li> 
+                    <li><a href="?action=editBio"><i class="fas fa-user-edit"></i>Biographie</a></li>
+                    <li><a href="?action=allUsers"><i class="fas fa-users"></i>Utilisateurs</a></li>  
                     <li><a href="?action=logoutAdmin"><i class="fas fa-power-off"></i>LogOut</a></li> 
                 </ul>
             </nav>

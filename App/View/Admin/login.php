@@ -9,20 +9,11 @@
 
             <input type="submit" class="btn btn-primary mb-2 connect" value="Connexion" />
         </form>
-        
-        <script>
-        
-            $('.connect').submit (function({
-                var password = $('.password').val();
-                var hash = password_hash(password);
-            }))
-        
-        </script>
 
         <?php if (isset($vars['error'])): ?>
 
         <div id="error"><?= $vars['error'] ?></div>
         
-        <?php endif; ?>
+        <?php endif ?>
     </div>
 </body>
