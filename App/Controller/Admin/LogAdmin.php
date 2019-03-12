@@ -1,11 +1,9 @@
 <?php
     namespace App\Controller\Admin;
-    use \Core\Controller;
-    use App\Model\LoginModel;
+    use Core\Controller;
+    use App\Model;
 
-require_once('../App/Model/Login.php');
-
-class LoginController extends Controller
+class LogAdmin extends \Core\Controller
 {
     function login($post, $redirect) {
 
@@ -14,14 +12,14 @@ class LoginController extends Controller
       {
         $login = $post['login'];
         $password = $post['password'];
-        $loginModel = new LoginModel();
+        $loginModel = new \App\Model\LogAdmin();
         $connected = $loginModel->login($login, $password);
         if (!$connected) {
           $_SESSION['connected'] = false;
-          $message['error'] = 'Mdp incorrect';
+          $message['error'] = 'Mot de passe incorrect';
         } else {
           $_SESSION['connected'] = true;
-          header('Location: /tests/projet4/index.php?action='.$redirect);
+          header('Location: index.php?action='.$redirect);
         }
       }
 

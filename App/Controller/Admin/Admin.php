@@ -1,15 +1,13 @@
 <?php
     namespace App\Controller\Admin;
-    use \Core\Controller;
-    use App\Model\Comments;
+    use Core\Controller;
+    use App\Model;
 
-//require_once('../App/Model/Comments.php');
-
-class AdminController extends Controller 
+class Admin extends \Core\Controller 
 {
     public function index()
     {
-        $commentModel = new Comments();
+        $commentModel = new \App\Model\Comments();
         $moderateComm = $commentModel->abuse();
         $this->view->displayAdmin('index', ['moderateComm' => $moderateComm]);
     }

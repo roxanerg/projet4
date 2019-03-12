@@ -1,14 +1,14 @@
 <?php
     namespace App\Controller;
     use Core\Controller;
-    use App\Model\Bio;
+    use App\Model;
 
 
-class BioController extends Controller
+class Bio extends \Core\Controller
 {
     function view()
     {
-        $bioModel = new Bio();
+        $bioModel = new \App\Model\Bio();
         $bio = $bioModel->get();
         $this->view->display('biography', ['biography']);
     }

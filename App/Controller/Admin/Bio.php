@@ -1,22 +1,20 @@
 <?php
     namespace App\Controller\Admin;
-    use \Core\Controller;
-    use App\Model\Bio;
+    use Core\Controller;
+    use App\Model;
 
-require_once('../App/Model/Bio.php');
-
-class AdBio extends Controller
+class Bio extends \Core\Controller
 {
     function edit()
     {
-        $bioModel = new BioModel();
+        $bioModel = new \App\Model\Bio();
         $biography = $bioModel->edit();   
         $this->view->displayAdmin('biography', ['biography' => $biography]);
     }
 
-    function add($post)
+    function add($contenu)
     {
-        $bioModel = new BioModel();
+        $bioModel = new \App\Model\Bio();
         $biography = $bioModel->add();
     }
 } 

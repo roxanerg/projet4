@@ -1,10 +1,8 @@
 <?php
-    namespace App\Model;
-    use Core\Model;
+namespace App\Model;
+use Core;
 
-require_once('../Core/Model.php');
-
-class Comments extends Model
+class Comments extends \Core\Model
 {
 
     function get($episodeId) 

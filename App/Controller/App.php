@@ -1,9 +1,9 @@
 <?php
-namespace App\Controller;
-use Core\Controller;
-//use App\Model;
+    namespace App\Controller;
+    use Core\Controller;
+    use App\Model;
 
-class AppController extends Controller 
+class App extends \Core\Controller 
 {
     
     public function index()

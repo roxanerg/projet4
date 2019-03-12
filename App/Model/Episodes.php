@@ -1,8 +1,8 @@
 <?php
-namespace App\Model;
-use Core\Model;
+    namespace App\Model;
+    use Core;
 
-class Episodes extends Model
+class Episodes extends \Core\Model
 {
 
     /**
@@ -10,11 +10,6 @@ class Episodes extends Model
      */
     public function list($debut = 0, $limite = 5, $textmax = 500)
     {
-        /*$request = $this->db->prepare('SELECT id, titre, contenu, date_creation, date_modif FROM episodes ORDER BY id DESC');
-        $request->execute(array($episodeId));
-        $episodesList = $request->fetchAll();
-        return $episodesList;*/
-
         $sql = 'SELECT id, titre, contenu, date_creation, date_modif FROM episodes ORDER BY id DESC'; 
 
         $sql .= ' LIMIT '.(int) $limite;
@@ -54,10 +49,9 @@ class Episodes extends Model
     
     function add($titre, $contenu, $date_creation)
     {
-        $request = $this->db->prepare('INSERT INTO episodes (id, titre, contenu, date_creation, date_modif) VALUES(NULL, :titre, :contenu, :date_creation, NOW())');
+        $request = $this->db->prepare('INSERT INTO episodes (titre, contenu, date_creation) VALUES(:titre, :contenu, NOW())');
         $request->bindParam(':titre', $titre, \PDO::PARAM_STR);
         $request->bindParam(':contenu', $contenu, \PDO::PARAM_STR);
-        $request->bindParam(':date_creation', $date_creation, \PDO::PARAM_STR);
         $add_post = $request->execute();
         return $add_post;
     }

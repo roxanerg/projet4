@@ -1,11 +1,8 @@
 <?php
-
 spl_autoload_register('Autoloader::CoreLoader');
-//spl_autoload_register('Autoloader::AppLoader');
 
 class Autoloader 
-{
-    
+{  
 
     static function CoreLoader($className) 
     {
@@ -14,13 +11,5 @@ class Autoloader
         include $path.$className.'.php';
 
     }
-
-    
-    /*static function AppLoader($className) 
-    {
-        $path = '../App';
-        include $path.$className.'.php';
-
-    }*/
 
 }

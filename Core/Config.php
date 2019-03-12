@@ -12,7 +12,7 @@ class Config
   
      public function __construct()
      {
-         include_once('../App/Config.php');
+         include_once('../App/Config/Config.php');
          $this->settings = $config;
      }
     

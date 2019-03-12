@@ -1,100 +1,96 @@
 <?php
-use App\Controller;
-require_once('../Core/Autoloader.php');
-session_start();
+    use App\Controller;
+    use App\Controller\Admin;
+    use Core;
+    require_once('../Core/Autoloader.php');
+    
+    session_start();
+        
+    $action_get = '';
 
-Core\Config::get();
-
-$action_get = '';
-
-/*
     if (isset($_GET['action'])) 
     {
         $action_get = $_GET['action'];
-    } 
-    else 
-    {
-        http_response_code(404);
-       // include('../App/View/404.php');
-        exit;
     }
-*/
+    
+    Core\Config::get();
+
     $action = explode('/', $action_get);
     
     switch ($action[0]) {
 
-        case 'episodeView' : $controller = new EpisodesController();
+        case 'episodeView' : $controller = new App\Controller\Episodes();
             $controller->view($_GET['id']);
             break;
 
-        case 'getBio' : $controller = new BioController();
+        case 'getBio' : $controller = new App\Controller\Bio();
             $controller->view();
             break;
         
-        case 'addComment' : $controller = new CommentController();
+        case 'addComment' : $controller = new App\Controller\Comments();
             $controller->add($_POST);
-            $controller = new EpisodesController();
+            $controller = new App\Controller\Episodes();
             $controller->view($_POST['episodeId']);
             break;
 
-        case 'reportComment' : $controller = new CommentController();
+        case 'reportComment' : $controller = new App\Controller\Comments();
         $controller->report($_GET);
         break;
 
         // backend
         case 'loginAdmin' : if (isset($_SESSION['connected']) && $_SESSION['connected']) {
-            header('Location: /tests/projet4/index.php?action=indexAdmin');
+            header('Location: /index.php?action=indexAdmin');
         }
-                $controller = new LoginController();
+                $controller = new App\Controller\Admin\LoginAdmin();
                 $controller->login($_POST, 'indexAdmin');
             
             break;
         case 'indexAdmin' : if (!$_SESSION['connected']) {
-            header('Location: /tests/projet4/index.php?action=loginAdmin');
+            header('Location: /index.php?action=loginAdmin');
         }
-        $controller = new AdminController();
+        $controller = new App\Controller\Admin\AdminController();
         $controller->index();
                 break;
         
         case 'logoutAdmin' : unset($_SESSION['connected']);
-        header('Location: /tests/projet4/index.php');
+        header('Location: /index.php');
             break;
             
-        case 'allEpisodes' : $controller = new AdEpisodes();
+        case 'allEpisodes' : $controller = new App\Controller\Admin\Episodes();
             $controller->viewAll();
             break;
             
-        case 'editEpisode' : $controller = new AdEpisodes();
+        case 'editEpisode' : $controller = new App\Controller\Admin\Episodes();
             $controller->edit($_GET['id'], $_POST);
             break;
 
-        case 'addEpisode' : $controller = new AdEpisodes();
+        case 'addEpisode' : $controller = new App\Controller\Admin\Episodes();
             $controller->add($_POST);
+            $controller->viewAll();
             break;
 
-        case 'deleteEpisode' : $controller = new AdEpisodes();
+        case 'deleteEpisode' : $controller = new App\Controller\Admin\Episodes();
             $controller->delete($_GET['id']);
             $controller->viewAll();
             break;
 
-        case 'allComments' : $controller = new AdComments();
+        case 'allComments' : $controller = new App\Controller\Admin\Comments();
             $controller->view();
             break;
         
-        case 'deleteComment' : $controller = new AdComments();
+        case 'deleteComment' : $controller = new App\Controller\Admin\Comments();
             $controller->delete($_GET['commentId']);
             $controller->view();
             break;
 
-        case 'editBio' : $controller = new AdBio();
+        case 'editBio' : $controller = new App\Controller\Admin\Bio();
             $controller->edit();
             break;
 
-        case 'addBio' : $controller = new AdBio();
+        case 'addBio' : $controller = new App\Controller\Admin\Bio();
             $controller->add($_POST);
             break;
 
-        default : 
-if(empty())            $controller = new App\Controller\AppController();
-            $controller->index();
+        default : $controller = new App\Controller\App();
+            $controller->index(); 
     }

@@ -1,24 +1,20 @@
 <?php
     namespace App\Controller\Admin;
     use Core\Controller;
-    use App\Model\Episodes;
+    use App\Model;
 
-
-//require_once('../App/Model/Episodes.php');
-
-class AdEpisodes extends Controller
-{
-    
+class Episodes extends \Core\Controller
+{   
     function viewAll()
     {
-        $postModel = new Episodes();
+        $postModel = new \App\Model\Episodes();
         $episodes = $postModel->list(0, 50, 300);
         $this->view->displayAdmin('episodes', ['episodes' => $episodes]);
     }
 
     function edit($id=0, $post)  
     {      
-        $postModel = new Episodes();
+        $postModel = new \App\Model\Episodes();
         if (!empty($post)) 
         {
             $edit_post = $postModel->update($id, $post['titre'], $post['contenu']);
@@ -29,27 +25,16 @@ class AdEpisodes extends Controller
     
     function add($post)
     {
-        $postModel = new Episodes();
+        $postModel = new \App\Model\Episodes();
         $add_post = $postModel->add($post['titre'], $post['contenu'], $post['date_creation']);
+        return $add_post;
     }
 
     function delete($id=0)
     {
-        $postModel = new PostModel();
+        $postModel = new \App\Model\Episodes();
         $deleted = $postModel->delete($id);
     }
-    
-
-    /* exemple sauvegarde
-    public function save(Episodes $episodes)
-    {
-        if ($episodes->isValid()) {
-            $episodes->isNew() ? $this->add($episodes) : $this->update($episodes);
-        }
-        else {
-            throw new RuntimeException('La news doit être valide pour être enregistrée');
-        }
-    }*/
     
     protected $errors = [],
               $id,
