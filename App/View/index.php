@@ -9,20 +9,25 @@
         </div>
     </div>
 
-    <div class="container home_ep">
-        <h2>Les derniers épisodes :</h2>
+    <div class="container">
+        <div id="last_ep"><h2>Les derniers épisodes :</h2></div>
+
+        <div id="home_ep">
 
         <?php foreach ($vars['episodes'] as $episode): ?>
-
-            <h4 class="ep_title">
-                <a href="?action=episodeView&id=<?= $episode['id']?>"><?= $episode['titre']?></a>
-            </h4>
-            <p class="ep_excerpt"><?= $episode['contenu']?></p>
-            <a href="?action=episodeView&id=<?= $episode['id']?>" class="r_more">Lire la suite</a>
-
+        
+            <div class="ep_card">
+                <h3 class="ep_title">
+                    <a href="?action=episodeView&id=<?= $episode['id']?>"><?= $episode['titre']?></a>
+                </h3>
+                <p class="ep_excerpt"><?= $episode['contenu']?></p>
+                <a href="?action=episodeView&id=<?= $episode['id']?>" class="btn btn-outline-primary btn-sm">Lire la suite</a>
+            </div>
+            
         <?php endforeach; ?>
 
-        
+        </div>
+
         <nav aria-label="Episodes navigation">
             <ul class="pagination">
                 <?php if($vars['page'] > 1): ?>
@@ -38,15 +43,7 @@
                 <?php for ($i = 1; $i <= $vars['pages']; $i++): ?>   
                 <li class="page-item"><a class="page-link" href="?page=<?=$i?>"><?=$i?></a></li>
                 <?php endfor; ?>
-
-                <!--<script>
-                $(document).ready(function() {
-                    var active = $('.page-link.active');
-                    $('.page-link').click(function({
-                        active.css('color', 'red');
-                    })); 
-                });
-                </script>-->
+                
                 <?php if($vars['page'] < $vars['pages']): ?>
                 <li class="page-item">
                     <a class="page-link" href="?page=<?=$vars['page']+1?>" aria-label="Next">
