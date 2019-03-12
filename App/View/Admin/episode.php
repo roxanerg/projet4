@@ -2,24 +2,38 @@
 
 <h2></h2>
 
-<form action="?action=editEpisode&id=<?= $vars['episode']['id'] ?>" method="POST">
+<?php if (empty($vars['episode']['id'])) { ?>
+    <form action="?action=addEpisode" method="POST">
+<?php } else { ?>
 
-    <input type="text" name="titre" value="<?= htmlspecialchars($vars['episode']['titre']); ?>" class="form-control txt_episode" placeholder="Titre"/><br />
+<form action="?action=editEpisode&id=<?= $vars['episode']['id'] ?>" method="POST"> 
+
+<?php } ?>
+
+    <input type="text" name="titre" value="<?= $vars['episode']['titre']; ?>" class="form-control txt_episode" placeholder="Titre" required><br />
     
-    <textarea name="contenu" rows="20" cols="33" class="form-control txt_episode"><?= nl2br(htmlspecialchars($vars['episode']['contenu'])); ?></textarea>
+    <textarea name="contenu" rows="20" cols="33" class="form-control txt_episode" required><?= nl2br($vars['episode']['contenu']); ?></textarea>
     
-    <input type="hidden" name="date_creation" value="<?= htmlspecialchars($vars['episode']['date_creation']); ?>"/><br />
+    <input type="hidden" name="date_creation" value="<?= $vars['episode']['date_creation']; ?>"/><br />
     
-    <input type="hidden" name="date_modif" value="<?= htmlspecialchars($vars['episode']['date_modif']); ?>"/><br />
+    <input type="hidden" name="date_modif" value="<?= $vars['episode']['date_modif']; ?>"/><br />
     
-    <input type="submit" class="btn btn-primary mb-2 connect" value="Ajouter" />
+    <input type="submit" class="btn btn-primary mb-2 connect" value="<?php if (empty($vars['episode']['id'])) { ?>Ajouter<?php } else { ?>Modifier<?php } ?>" />
 
 </form>
 
-<a href="?action=deleteEpisode&id=<?=$vars['episode']['id']; ?>">Supprimer</a>
+<?php if (empty($vars['episode']['id'])) { ?><a href="?action=allEpisodes">Annuler</a><?php } else { ?><a href="?action=deleteEpisode&id=<?=$vars['episode']['id']; ?>" class="supp">Supprimer</a><?php } ?>
 
 
+<script>
 
-  
-<!--ajouter une condition pr afficher la date de creation OU modif si existe 
-+ si épisode existe bouton = "modifier" sinon = "valider" -->
+$(document).ready(function() {
+
+    $('.supp').on('click', function(event) {
+        alert('Êtes-vous sur de vouloir supprimer l\'épisode ?');         
+        })
+    })
+});
+
+</script>
+                                         

@@ -12,9 +12,10 @@
     <script>
         tinymce.init({
             selector :'.txt_episode',
-            content_css : 'www/css/admin.css"',
+            content_css : 'www/css/admin.css',
             contextmenu : "link image imagetools table spellchecker",
-            cleanup : true;
+            language : 'fr_FR',
+            cleanup : true
             });
     </script>
 </head>
@@ -37,3 +38,5 @@
                 </ul>
             </nav>
         </header>
+
+        <div class="container-fluid">

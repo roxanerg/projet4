@@ -1,6 +1,6 @@
-<h2>Bienvenue</h2>
+<h2 id="welcome">Bienvenue</h2>
 
-<h3>Commentaires signalés :</h3>
+<h3 id="flagged">Commentaires signalés :</h3>
 
 <?php foreach ($vars['moderateComm'] as $comms): ?>
 
