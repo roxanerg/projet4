@@ -9,12 +9,22 @@
 body 
 {
     margin: 0;
-    background: lightgray;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 h1, h2, h3, h4
 {
     font-family: 'Roboto-Black';
+    background: rgba(245, 245, 245, 0.5);
+}
+
+h2
+{	
+    font-weight: bold;
+    font-size: 1.7em;
+	text-align: center;
+    text-transform: uppercase;
+	padding: 10px;
 }
 
 ul 
@@ -35,6 +45,7 @@ header
     width: 100%;
     z-index: 1;
     background: rgba(245, 245, 245, 0.5);
+	filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.6));
 }
 
 header::after
@@ -132,10 +143,11 @@ header::after
     position: absolute;
     width: 70%;
     top: 30%;
-    left: 20%;
+    left: 17%;
     text-align: center;
     padding: 10px;
     background: rgba(0, 0, 0, 0.3);
+	filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.6));
 }
 
 #title
@@ -161,22 +173,37 @@ header::after
 }
 
 /* affichage derniers episodes */
-#last_ep
+.episodes
 {
-    text-align: center;
-    padding: 40px 20px 30px;
 }
 
-#last_ep h2
-{   
-    font-weight: bold;
-    font-size: 1.7em;
-    text-transform: uppercase;
+#ep_all
+{
+    text-align: center;
+	margin: 100px 10px 70px;
+}
+
+#ep_home
+{
+    margin: 60px 20px 40px;
+}
+
+.ep_body
+{
+	padding: 25px 20px 5px;
+    background: rgba(245, 245, 245, 0.5);
 }
 
 .ep_card
 {
     margin: 40px auto;
+	border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+}
+
+.ep_card h3
+{
+	padding: 10px;
+	background: transparent;
 }
 
 .ep_excerpt
@@ -184,11 +211,42 @@ header::after
     line-height: 2em;
 }
 
+.next
+{
+	display: inline-flex;
+	margin: 10px auto 20px;
+}
+
+.next:after {
+    content: "→";
+    width: 20px;
+    height: 20px;
+}
+
+.next:hover
+{
+    animation: turn 1.5s infinite;
+}
+
+@keyframes turn
+{
+    {
+        0%
+        {
+			transform : rotate(0deg);
+        }
+
+        100%
+        {
+            transform : rotate(360deg);
+        }
+    }
+}
 /*pagination*/
 
-#pagination 
+.pagination 
 {
-    display: flex;
+    justify-content: end;
 }
 
 input:invalid
@@ -196,20 +254,79 @@ input:invalid
     filter: drop-shadow(2px 2px 2px 2px red);
 }
 
-/* pages épisode et biographie */
 .container-fluid
 {
-    padding-top: 150px;
+    padding-top: 180px;
 }
 
-#episode_title
+/* pages épisode */
+.episode-home
 {
-   padding-top: 200px;
+    background: rgba(245, 245, 245, 0.8);
 }
 
-form
+.episode_title
 {
-    margin: 20px;
+	text-align: center;
+	background: slategray;
+}
+
+.episode_text
+{
+	padding: 20px;
+	background: #FFF;
+	border-bottom: 1px lightgray solid;
+	border-right: 1px lightgray solid;
+}
+
+#dates
+{
+	text-align: right;
+}
+
+.episode_date
+{
+	margin: 20px 10px;
+	filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.prev_next
+{
+	display: flex;
+	justify-content: space-between;
+	padding: 40px 10px;
+}
+
+/* formulaire ajout commentaires */
+#add_comm_title
+{
+	background: rgba(245, 245, 245, 0.7);
+}
+
+#add_comm
+{
+	text-align: center;
+    margin: 50px;
+	padding: 8px 10px 4px;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.8));
+}
+
+#add_comm h3
+{
+	padding: 10px 0;
+}
+
+#add_comm form
+{
+	padding: 30px 0 10px;
+}
+
+
+#add_comm input, #add_comm textarea
+{
+	margin: auto;
 }
 
 form input
@@ -217,4 +334,99 @@ form input
     margin: 10px 0;
 }
 
+.flag
+{
+	margin-left: 8px;
+}
 
+/* commentaires */
+#comms
+{
+	margin: 30px;
+}
+
+.comment
+{
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid lightgray;
+}
+
+.comm_auth
+{
+	display: inline-block;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.comm
+{
+	padding: 10px;
+	font-style: italic;
+	background: #FFF;
+}
+
+.report
+{
+	background: #FFF;
+}
+
+/* page biographie */
+#biography
+{
+	display: flex;
+	margin: 30px 20px;
+}
+
+#bio_text
+{
+	padding: 20px 40px;
+    background: rgba(245, 245, 245, 0.8);
+}
+
+#portrait
+{
+	min-width: 213px;
+    max-width: 200px;
+	margin: 0 8px 0 16px;
+    border: 1px rgba(0, 0, 0, 0.6) solid;
+	border-radius: 0 25%;
+}
+
+/* login */
+.connexion
+{
+	padding: 180px 100px 10px;
+}
+
+/* responsive tablettes */
+@media screen and (max-width: 992px) {
+	#home_title
+	{
+		left: 0;
+		padding: 0;
+		width: 100%;
+	}
+}
+
+/* responsive smartphones */
+@media screen and (max-width: 768px) {
+
+	#home_title
+	{
+		left: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	#biography
+	{
+		flex-direction: column-reverse;
+	}
+
+	#portrait
+	{
+		margin: 0 auto 20px;
+	}
+}
