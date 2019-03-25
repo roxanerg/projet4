@@ -19,15 +19,15 @@
     
     switch ($action[0]) {
 
-        case 'episodeView' : $controller = new App\Controller\Episodes();
+        case 'episode' : $controller = new App\Controller\Episodes();
             $controller->view($_GET['id']);
             break;
 
-        case 'getBio' : $controller = new App\Controller\Bio();
+        case 'biographie' : $controller = new App\Controller\Bio();
             $controller->view();
             break;
         
-        case 'addComment' : $controller = new App\Controller\Comments();
+        case 'comment' : $controller = new App\Controller\Comments();
             $controller->add($_POST);
             $controller = new App\Controller\Episodes();
             $controller->view($_POST['episodeId']);
@@ -38,22 +38,26 @@
         break;
 
         // backend
-        case 'loginAdmin' : if (isset($_SESSION['connected']) && $_SESSION['connected']) {
-            header('Location: /index.php?action=indexAdmin');
-        }
-                $controller = new App\Controller\Admin\LogAdmin();
-                $controller->login($_POST, 'indexAdmin');
+        case 'login' : 
+            $controller = new App\Controller\Admin\LogAdmin();
+            $controller->login($_POST, 'indexAdmin');
+			if (isset($_SESSION['connected']) && $_SESSION['connected']) {
+				header('Location: indexAdmin');
+			}
             
             break;
-        case 'indexAdmin' : if (!$_SESSION['connected']) {
-            header('Location: /index.php?action=loginAdmin');
-        }
-        $controller = new App\Controller\Admin\Admin();
-        $controller->index();
-                break;
+
+        case 'indexAdmin' : 
+			if (!$_SESSION['connected']) {
+				header('Location: login');
+			} else {
+				$controller = new App\Controller\Admin\Admin();
+				$controller->index();
+			}
+            break;
         
         case 'logoutAdmin' : unset($_SESSION['connected']);
-        header('Location: /index.php');
+			header('Location: /index.php');
             break;
             
         case 'allEpisodes' : $controller = new App\Controller\Admin\Episodes();
@@ -61,7 +65,7 @@
             break;
             
         case 'editEpisode' : $controller = new App\Controller\Admin\Episodes();
-            $controller->edit($_GET['id'], $_POST);
+            $controller->edit($_POST);
             break;
 
         case 'addEpisode' : $controller = new App\Controller\Admin\Episodes();
@@ -77,26 +81,40 @@
         case 'allComments' : $controller = new App\Controller\Admin\Comments();
             $controller->view();
             break;
+
+		case 'unreportComment' : $controller = new App\Controller\Admin\Admin();
+            $controller->unreport($_POST);
+			$controller->index();
+            break;
         
         case 'deleteComment' : $controller = new App\Controller\Admin\Comments();
-            $controller->delete($_GET['commentId']);
-            $controller->view();
-            break;
+            $controller->delete($_GET['id']);
+			$action = explode('=', $_SERVER['HTTP_REFERER']);
+
+			if ($action[1]=='allComments') {
+				header('Location: /?action=allComments');
+			} else {
+				header('Location: /indexAdmin');
+			}
+			break;
 
         case 'editBio' : $controller = new App\Controller\Admin\Bio();
-            $controller->edit();
-            break;
-
-        case 'addBio' : $controller = new App\Controller\Admin\Bio();
-            $controller->add($_POST);
+            $controller->edit(1, $_POST);
+			
+		print_r($_POST); exit;
             break;
 
         case 'allUsers' : $controller = new App\Controller\Admin\Users();
             $controller->viewAll();
             break;
+			
+		case 'editUser' : $controller = new App\Controller\Admin\Users();
+            $controller->edit($_GET['id'], $_POST);
+            break;
 
         case 'addUser' : $controller = new App\Controller\Admin\Users();
             $controller->add($_POST);
+			$controller->viewAll();
             break;
 
         case 'deleteUser' : $controller = new App\Controller\Admin\Users();
