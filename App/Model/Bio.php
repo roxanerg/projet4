@@ -4,34 +4,43 @@
 
 class Bio extends \Core\Model
 {
+    /**
+     * @fn	public function get()
+     *
+     * @brief	Gets the bio
+     *
+     * @author	Roxane Riff
+     * @date	25/03/2019
+     *
+     * @returns	A function.
+     */
+
     public function get()
     {
-        $request = $this->db->prepare('SELECT contenu FROM biographie');
+        $request = $this->db->prepare('SELECT * FROM biographie WHERE id= 1');
         $request->execute(array());
-        $biography = $request->fetchAll();
+        $biography = $request->fetch(\PDO::FETCH_ASSOC);
         return $biography;
     }
 
-    function add($contenu)
-    {
-        $request = $this->db->prepare('INSERT INTO biographie (contenu) VALUE(:contenu');
-        $request->bindParam(':contenu', $contenu, \PDO::PARAM_STR);
-        $biography = $request->execute();
-        return $biography;
-    }
+    /**
+     * @fn	function update($id, $contenu)
+     *
+     * @brief	Updates this object
+     *
+     * @author	A
+     * @date	25/03/2019
+     *
+     * @param	id	   	The identifier.
+     * @param	contenu	The content.
+     *
+     * @returns	.
+     */
 
-    function edit() 
+    function update($id, $contenu)
     {
-        $request = $this->db->prepare('SELECT contenu FROM biographie');
-        $request->execute(array());
-        $biography = $request->fetchAll();
-        return $biography;
-    }
-
-    function update()
-    {
-        $request = $this->db->prepare('UPDATE biographie SET contenu = :contenu');
-        $request->bindValue(':contenu', $contenu, PDO::PARAM_STR);
+        $request = $this->db->prepare('UPDATE biographie SET contenu = :contenu WHERE id= 1');
+        $request->bindValue(':contenu', $contenu, \PDO::PARAM_STR);
         $request->execute();
     }
 
