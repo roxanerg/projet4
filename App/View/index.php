@@ -1,28 +1,30 @@
-<?php $title = "Blog de Jean Forteroche"; ?>
+<?php $title = "Blog de Jean Forteroche" ?>
 
 <div>
     <div id="home_screen">
         <div id="home_title"><h1><b id="title">"Un billet simple pour l'Alaska"</b><br /><b id="author">par Jean Forteroche</b></h1></div>
         
         <div id="home_photo">
-        <img src="./www/images/AuroraWinterTrain.jpg" id="home_image" alt="train Alaska">
+        <img src="images/AuroraWinterTrain.jpg" id="home_image" alt="train Alaska">
         </div>
     </div>
 
-    <div class="container">
-        <div id="last_ep"><h2>Les derniers épisodes :</h2></div>
+    <div class="episodes">
+        <div id="ep_all"><h2>Les derniers épisodes :</h2></div>
 
-        <div id="home_ep">
+        <div id="ep_home">
 
         <?php foreach ($vars['episodes'] as $episode): ?>
-        
+  
             <div class="ep_card">
-                <h3 class="ep_title">
-                    <a href="?action=episodeView&id=<?= $episode['id']?>"><?= $episode['titre']?></a>
-                </h3>
-                <p class="ep_excerpt"><?= $episode['contenu']?></p>
-                <a href="?action=episodeView&id=<?= $episode['id']?>" class="btn btn-outline-primary btn-sm">Lire la suite</a>
-            </div>
+				<div class="ep_body">
+					<h3 class="ep_title">
+						<a href="/episode/<?= $episode['id']?>-<?= self::cleanUrl($episode['titre'])?>"><?= $episode['titre']?></a>
+					</h3>
+					<p class="ep_excerpt"><?= $episode['contenu']?></p>
+					<a href="/episode/<?= $episode['id']?>-<?= self::cleanUrl($episode['titre'])?>" class="next btn btn-primary btn-sm">Lire la suite</a>
+				</div>
+			</div>
             
         <?php endforeach; ?>
 
