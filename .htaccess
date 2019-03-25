@@ -1,28 +1,23 @@
 
 # Activons le "RewriteEngine" pour pouvoir 
 # utiliser les "RewriteRule" et "RewriteCond"
+
 RewriteEngine on
 
-# Ensuite, v�rifions que nous sommes bien sur 
+RewriteBase /
+
+# Ensuite, v?rifions que nous sommes bien sur 
 #le site
 # et dans le sous-dossier voulu.
-#RewriteCond %{HTTP_HOST} ^(www.)?projet4.roxanerg.com$
+
+RewriteCond %{HTTP_HOST} ^(www.)?projet4.roxanerg.com$
 RewriteCond %{REQUEST_URI} !^/www/
 
-# V�rifions si la personne a tap� le nom d'un
-# fichier ou dossier existant (dans ce cas, nous
-# ne voulons pas r�-�crire la requ�te...)
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .*\.(gif|GIF|jpg|JPG|bmp|BMP|wav|mp3|wmv|avi|mpeg)$ - [F]
 
-# Maintenant que toutes les conditions ont �t�
-# rencontr�es, on redirige vers le bon sous-dossier
-RewriteRule ^(.*)$ /www/$1
-
-# Verifie si la personne n'a tapé que le nom de domaine (avec ou sans www) sans
-# rien mettre apr�s la barre oblique (/). Si oui, on redirige
-# vers le bon sous-dossier, sur le fichier principal.
-RewriteRule ^(/)?$ www/index.php [L]
+# Maintenant que toutes les conditions ont ?t?
+# rencontr?es, on redirige vers le bon sous-dossier
+RewriteRule ^(.*)$ /www/$1 [L]
 
 # Protection contre attaques de 'clickjacking'
-Header set X-Frame-Options: "sameorigin"
+#Header set X-Frame-Options: "sameorigin"
