@@ -5,6 +5,20 @@
 
 class LogAdmin extends \Core\Controller
 {
+    /**
+     * @fn	function login($post, $redirect)
+     *
+     * @brief	Login
+     *
+     * @author	Roxane Riff
+     * @date	25/03/2019
+     *
+     * @param	post		The post.
+     * @param	redirect	The redirect.
+     *
+     * @returns	.
+     */
+
     function login($post, $redirect) {
 
       $message = [];

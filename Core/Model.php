@@ -5,10 +5,34 @@ class Model
 {
     protected $db = null;
 
+    /**
+     * @fn	public function __construct(PDO $db=null)
+     *
+     * @brief	Constructs the given database
+     *
+     * @author	Roxane Riff
+     * @date	25/03/2019
+     *
+     * @param	db	(Optional) The database.
+     *
+     * @returns	A function.
+     */
+
     public function __construct(PDO $db=null)
     {
       $this->dbConnect();
     }
+
+    /**
+     * @fn	protected function dbConnect()
+     *
+     * @brief	Database connect
+     *
+     * @author	Roxane Riff
+     * @date	25/03/2019
+     *
+     * @returns	A function.
+     */
 
     protected function dbConnect()
     {

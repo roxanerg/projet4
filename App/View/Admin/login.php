@@ -1,11 +1,11 @@
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid connexion col-7">
         <h2>Connexion</h2>
 
-        <form action="?action=loginAdmin" method="post">
-            <input type="email" name="login" class="form-control" placeholder="Identifiant"/><br />
+        <form action="login" method="post" class="form-signin">
+            <input type="email" name="login" class="form-control" placeholder="Identifiant"/>
 
-            <input type="password" name="password" class="form-control password" placeholder="Mot de passe"/><br /><br />
+            <input type="password" name="password" class="form-control password" placeholder="Mot de passe"/>
 
             <input type="submit" class="btn btn-primary mb-2 connect" value="Connexion" />
         </form>

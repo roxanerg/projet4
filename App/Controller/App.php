@@ -5,7 +5,17 @@
 
 class App extends \Core\Controller 
 {
-    
+    /**
+     * @fn	public function index()
+     *
+     * @brief	Gets the index
+     *
+     * @author	Roxane Riff
+     * @date	25/03/2019
+     *
+     * @returns	A function.
+     */
+
     public function index()
     {
         $postModel = new \App\Model\Episodes();
